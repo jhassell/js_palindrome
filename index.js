@@ -2,6 +2,7 @@
 (function() {
   var Phrase, TranslatedPhrase, frase, phrase, reverseIt;
 
+
   reverseIt = function(string) {
     return Array.from(string).reverse().join('');
   };
@@ -12,11 +13,10 @@
     }
 
     processor(string) {
-      return string.toLowerCase();
+      return this.letters().toLowerCase();
     }
 
     processedContent() {
-      console.log("At Phrase");
       return this.processor(this.content);
     }
 
@@ -28,6 +28,10 @@
       return this.content.toUpperCase();
     }
 
+    letters() {
+      return (this.content.match(/[a-z]/gi) || []).join("");
+    }
+    
   };
 
   TranslatedPhrase = class TranslatedPhrase extends Phrase {
@@ -38,7 +42,6 @@
     }
 
     processedContent() {
-      console.log("At TranslatedPhrase");
       return this.processor(this.translation);
     }
 
@@ -46,11 +49,10 @@
 
   phrase = new Phrase("recognize");
 
-  console.log(phrase.palindrome());
-
+  module.exports = Phrase
+    
   frase = new TranslatedPhrase("recognize", "rer");
 
-  console.log(frase.palindrome());
 
   //phrase = new Phrase "Racecar"
 
